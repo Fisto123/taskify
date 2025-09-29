@@ -1,5 +1,5 @@
 ## Rspeedy project
-
+https://chatgpt.com/share/68da9a85-981c-8007-85b7-3abe68fea289
 This is a ReactLynx project bootstrapped with `create-rspeedy`.
 
 ## Getting Started
