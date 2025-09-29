@@ -17,6 +17,8 @@ type Props = {
 
 const EDIT_ICON = require("../assets/edit_icon.png");
 const DELETE_ICON = require("../assets/delete_icon.png");
+const APPROVE_ICON = require("../assets/approve.png");
+const REVERT_ICON = require("../assets/revert.png");
 
 const STATUS_COLOR: Record<Task["status"], string> = {
   pending: "#ffb020",
@@ -38,40 +40,68 @@ export default function TaskCard({ task, onEdit, onDelete, onToggle }: Props) {
         height: "auto",
       }}
     >
-      <view style={{ paddingRight: "10px", marginTop: 50 }}>
+      <view style={{ paddingRight: "10px", marginTop: 3 }}>
+        <view
+          style={{
+            alignSelf: "flex-start",
+            backgroundColor: STATUS_COLOR[task.status],
+            padding: "4px 10px",
+            borderRadius: "7px",
+          }}
+        >
+          <text style={{ color: "#fff", fontSize: "12px" }}>{task.status}</text>
+        </view>
+        {/* <view
+          bindtap={() => onToggle(task)}
+          style={{
+            marginTop: "12px",
+            padding: "12px",
+            borderRadius: "10px",
+            backgroundColor:
+              task.status === "completed" ? "#e6f8f0" : "#fff7e6",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <text
+            style={{
+              color: task.status === "completed" ? "#2bb673" : "#b77800",
+              fontWeight: "bold",
+            }}
+          >
+            {task.status === "completed"
+              ? "Mark as Pending"
+              : "Mark as Completed"}
+          </text>
+        </view> */}
         <text
-          style={{ fontSize: "16px", fontWeight: "bold", color: "#1a1a1a" }}
+          style={{
+            fontSize: "16px",
+            fontWeight: "bold",
+            color: "#1a1a1a",
+            marginTop: "15px",
+            textTransform: "capitalize",
+          }}
         >
           {task.title}
         </text>
-        <text style={{ fontSize: "13px", color: "#666", marginTop: "4px" }}>
+        <text style={{ fontSize: "13px", color: "#666", marginTop: "7px" }}>
           {task.description}
         </text>
         <text style={{ fontSize: "12px", color: "#999", marginTop: "8px" }}>
           {task.date}
         </text>
-        <view
-          style={{
-            marginTop: "8px",
-            alignSelf: "flex-start",
-            backgroundColor: STATUS_COLOR[task.status],
-            padding: "4px 10px",
-            borderRadius: "999px",
-          }}
-        >
-          <text style={{ color: "#fff", fontSize: "12px" }}>{task.status}</text>
-        </view>
       </view>
 
       <view
         style={{
-          position: "absolute",
-          right: "0",
-          top: 0,
           display: "flex",
           flexDirection: "row",
           gap: "8px",
-          padding: 30,
+          padding: 10,
+          justifyContent: "flex-end",
+          alignItems: "flex-end",
+          marginTop: 10,
         }}
       >
         <view
@@ -86,7 +116,21 @@ export default function TaskCard({ task, onEdit, onDelete, onToggle }: Props) {
         >
           <image src={EDIT_ICON} style={{ width: "22px", height: "22px" }} />
         </view>
-
+        <view
+          bindtap={() => onToggle(task)}
+          style={{
+            padding: "8px",
+            borderRadius: "12px",
+            backgroundColor: "#f0fdf4",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <image
+            src={task.status === "pending" ? APPROVE_ICON : REVERT_ICON}
+            style={{ width: "22px", height: "22px" }}
+          />
+        </view>
         <view
           bindtap={() => onDelete(task)}
           style={{
@@ -99,29 +143,6 @@ export default function TaskCard({ task, onEdit, onDelete, onToggle }: Props) {
         >
           <image src={DELETE_ICON} style={{ width: "22px", height: "22px" }} />
         </view>
-      </view>
-
-      <view
-        bindtap={() => onToggle(task)}
-        style={{
-          marginTop: "12px",
-          padding: "12px",
-          borderRadius: "10px",
-          backgroundColor: task.status === "completed" ? "#e6f8f0" : "#fff7e6",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <text
-          style={{
-            color: task.status === "completed" ? "#2bb673" : "#b77800",
-            fontWeight: "bold",
-          }}
-        >
-          {task.status === "completed"
-            ? "Mark as Pending"
-            : "Mark as Completed"}
-        </text>
       </view>
     </view>
   );
