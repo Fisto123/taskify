@@ -1,4 +1,3 @@
-// src/pages/Home.tsx
 import { root, useMemo, useState } from "@lynx-js/react";
 import TaskCard from "../components/TaskCard";
 import Modal from "../components/Modal";
@@ -134,7 +133,7 @@ export default function Home() {
       <view
         style={{
           padding: "30px 16px",
-          backgroundColor: "#111827",
+          backgroundColor: "gray",
           borderBottomLeftRadius: "20px",
           borderBottomRightRadius: "20px",
           boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
@@ -156,17 +155,25 @@ export default function Home() {
           marginTop: "16px",
           backgroundColor: "#F1F0F0",
           padding: "10px 12px",
-          width: "100%",
+          width: "90%",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           color: "black",
+          borderColor: "gray",
+          borderWidth: 1,
+          borderRadius: "20px",
+          marginLeft: "17px",
         }}
       >
         <input
           placeholder="Search tasks..."
           bindinput={(res: any) => setQ(res.detail.value)}
-          style={{ fontSize: "14px", width: "90%", color: "black" }}
+          style={{
+            fontSize: "14px",
+            width: "90%",
+            color: "black",
+          }}
         />
       </view>
       <view
@@ -175,7 +182,7 @@ export default function Home() {
           flexDirection: "row",
           gap: "8px",
           marginTop: "12px",
-          marginLeft: 50,
+          marginLeft: "30px",
         }}
       >
         <FilterPill
@@ -220,13 +227,15 @@ export default function Home() {
               />
             ) : (
               filtered.map((t) => (
-                <TaskCard
-                  key={t.id}
-                  task={t}
-                  onEdit={startEdit}
-                  onDelete={askDelete}
-                  onToggle={toggle}
-                />
+                <view>
+                  <TaskCard
+                    key={t.id}
+                    task={t}
+                    onEdit={startEdit}
+                    onDelete={askDelete}
+                    onToggle={toggle}
+                  />
+                </view>
               ))
             )}
           </view>
